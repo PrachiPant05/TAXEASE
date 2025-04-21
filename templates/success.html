@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Report Generated - TaxEase</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --primary-dark: #0a58ca;
+            --secondary-color: #6c757d;
+            --success-color: #198754;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --border-radius: 8px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        main {
+            margin-top: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .success-header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--success-color);
+        }
+        
+        .success-header i {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        
+        .success-header h1 {
+            margin-bottom: 10px;
+        }
+        
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .tax-report {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .report-section {
+            margin-bottom: 30px;
+        }
+        
+        .report-section-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            color: var(--primary-color);
+        }
+        
+        .id-card {
+            background-color: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .id-card-header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .id-card-logo {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 10px;
+            background-color: #e9ecef;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+        
+        .id-card-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .id-detail {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        
+        .id-label {
+            flex: 1;
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+        
+        .id-value {
+            flex: 2;
+            font-weight: 600;
+        }
+        
+        .tax-detail {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .tax-detail:last-child {
+            border-bottom: none;
+        }
+        
+        .tax-label {
+            font-weight: 500;
+        }
+        
+        .tax-value {
+            font-weight: 600;
+        }
+        
+        .tax-total {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid #dee2e6;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: auto;
+        }
+        
+        /* Chat widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+        
+        .chat-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            font-size: 24px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        
+        .chat-toggle:hover {
+            transform: scale(1.05);
+            background-color: var(--primary-dark);
+        }
+        
+        .chat-box {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            display: none;
+            overflow: hidden;
+        }
+        
+        .chat-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-support-options {
+            display: flex;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .support-option {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s;
+        }
+        
+        .support-option:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .support-option i {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        
+        .chat-content {
+            height: 300px;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+        }
+        
+        .message.incoming {
+            justify-content: flex-start;
+        }
+        
+        .message.outgoing {
+            justify-content: flex-end;
+        }
+        
+        .message-bubble {
+            max-width: 80%;
+            padding: 12px 15px;
+            border-radius: 18px;
+            font-size: 14px;
+        }
+        
+        .incoming .message-bubble {
+            background-color: #f1f0f0;
+            color: var(--dark-color);
+            border-top-left-radius: 5px;
+        }
+        
+        .outgoing .message-bubble {
+            background-color: var(--primary-color);
+            color: white;
+            border-top-right-radius: 5px;
+        }
+        
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        
+        .chat-input button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .chat-input button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* Call modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 400px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-close {
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--secondary-color);
+        }
+        
+        .call-icon {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .phone-number {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .call-actions {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .call-action {
+            margin: 0 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .tax-report {
+                grid-template-columns: 1fr;
+            }
+            
+            .chat-box {
+                width: 300px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .action-buttons .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">
+                <i class="fas fa-file-invoice-dollar"></i> TaxEase
+            </a>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="success-header">
+            <i class="fas fa-check-circle"></i>
+            <h1>Tax Report Generated Successfully!</h1>
+            <p>Thank you for using our service, {{ name }}.</p>
+        </div>
+        
+        <div class="success-message">
+            <p>Your tax report has been generated and sent to your email address. You can also view a summary below.</p>
+        </div>
+        
+        <div class="card">
+            <div class="tax-report">
+                <div class="report-section">
+                    <h3 class="report-section-title">
+                        <i class="fas fa-id-card"></i> Identification Details
+                    </h3>
+                    
+                    <div class="id-card">
+                        <div class="id-card-header">
+                            <div class="id-card-logo">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="id-card-title">{{ name }}</div>
+                        </div>
+                        
+                        <div class="id-detail">
+                            <div class="id-label">PAN Number:</div>
+                            <div class="id-value">{{ pan_number }}</div>
+                        </div>
+                        
+                        <div class="id-detail">
+                            <div class="id-label">Aadhaar Number:</div>
+                            <div class="id-value">{{ aadhaar_number }}</div>
+                        </div>
+                        
+                        {% if user_details %}
+                        <div class="id-detail">
+                            <div class="id-label">Email:</div>
+                            <div class="id-value">{{ user_details.email }}</div>
+                        </div>
+                        
+                        {% if user_details.phone %}
+                        <div class="id-detail">
+                            <div class="id-label">Phone:</div>
+                            <div class="id-value">{{ user_details.phone }}</div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if user_details.dob %}
+                        <div class="id-detail">
+                            <div class="id-label">Date of Birth:</div>
+                            <div class="id-value">{{ user_details.dob }}</div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if user_details.income_source %}
+                        <div class="id-detail">
+                            <div class="id-label">Income Source:</div>
+                            <div class="id-value">{{ user_details.income_source }}</div>
+                        </div>
+                        {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="report-section">
+                    <h3 class="report-section-title">
+                        <i class="fas fa-calculator"></i> Tax Calculation Summary
+                    </h3>
+                    
+                    <div class="tax-detail">
+                        <div class="tax-label">Total Income:</div>
+                        <div class="tax-value">₹{{ result.total_income }}</div>
+                    </div>
+                    
+                    {% if result.salary_income is defined %}
+                    <div class="tax-detail">
+                        <div class="tax-label">Salary Income:</div>
+                        <div class="tax-value">₹{{ result.salary_income }}</div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if result.business_income is defined %}
+                    <div class="tax-detail">
+                        <div class="tax-label">Business Income:</div>
+                        <div class="tax-value">₹{{ result.business_income }}</div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if result.investment_income is defined %}
+                    <div class="tax-detail">
+                        <div class="tax-label">Investment Income:</div>
+                        <div class="tax-value">₹{{ result.investment_income }}</div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if result.deductions is defined %}
+                    <div class="tax-detail">
+                        <div class="tax-label">Total Deductions:</div>
+                        <div class="tax-value">₹{{ result.deductions }}</div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if result.taxable_income is defined %}
+                    <div class="tax-detail">
+                        <div class="tax-label">Taxable Income:</div>
+                        <div class="tax-value">₹{{ result.taxable_income }}</div>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="tax-total">
+                        <div class="tax-label">Tax Liability:</div>
+                        <div class="tax-value">₹{{ result.calculated_tax }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <a href="/" class="btn btn-secondary">Process Another Return</a>
+            <a href="#" class="btn" onclick="window.print()">Print Report</a>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 TaxEase - Your Digital Tax Partner. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+        <div class="chat-toggle" id="chat-toggle">
+            <i class="fas fa-comments"></i>
+        </div>
+        
+        <div class="chat-box" id="chat-box">
+            <div class="chat-header">
+                <h3>Customer Support</h3>
+                <span id="close-chat"><i class="fas fa-times"></i></span>
+            </div>
+            
+            <div class="chat-support-options">
+                <div class="support-option" id="text-support">
+                    <i class="fas fa-comment-dots"></i>
+                    <span>Text</span>
+                </div>
+                <div class="support-option" id="call-support">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>Call</span>
+                </div>
+            </div>
+            
+            <div class="chat-content" id="chat-content">
+                <div class="message incoming">
+                    <div class="message-bubble">
+                        Hi there! How can I help you with your tax report or any questions you might have?
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat-input">
+                <input type="text" id="chat-message" placeholder="Type your message...">
+                <button id="send-message"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Call Modal -->
+    <div class="modal" id="call-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Call Support</h3>
+                <span class="modal-close" id="close-call-modal">&times;</span>
+            </div>
+            <div class="call-icon">
+                <i class="fas fa-headset"></i>
+            </div>
+            <p>Our support team is available to help you with your tax-related questions!</p>
+            <div class="phone-number">
+                <i class="fas fa-phone-alt"></i> +91-1800-123-4567
+            </div>
+            <div class="call-actions">
+                <a href="tel:+911800123456" class="btn call-action">Call Now</a>
+                <button class="btn btn-secondary call-action" id="cancel-call">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Chat widget functionality
+        document.getElementById('chat-toggle').addEventListener('click', function() {
+            document.getElementById('chat-box').style.display = 'block';
+        });
+        
+        document.getElementById('close-chat').addEventListener('click', function() {
+            document.getElementById('chat-box').style.display = 'none';
+        });
+        
+        // Call support modal
+        document.getElementById('call-support').addEventListener('click', function() {
+            document.getElementById('call-modal').style.display = 'flex';
+        });
+        
+        document.getElementById('close-call-modal').addEventListener('click', function() {
+            document.getElementById('call-modal').style.display = 'none';
+        });
+        
+        document.getElementById('cancel-call').addEventListener('click', function() {
+            document.getElementById('call-modal').style.display = 'none';
+        });
+        
+        // Chat functionality
+        document.getElementById('send-message').addEventListener('click', sendMessage);
+        document.getElementById('chat-message').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        function sendMessage() {
+            const messageInput = document.getElementById('chat-message');
+            const message = messageInput.value.trim();
+            
+            if (message !== '') {
+                // Add outgoing message to chat
+                const chatContent = document.getElementById('chat-content');
+                const outgoingMessage = document.createElement('div');
+                outgoingMessage.className = 'message outgoing';
+                outgoingMessage.innerHTML = `<div class="message-bubble">${message}</div>`;
+                chatContent.appendChild(outgoingMessage);
+                
+                // Clear input
+                messageInput.value = '';
+                
+                // Scroll to bottom
+                chatContent.scrollTop = chatContent.scrollHeight;
+                
+                // In a real implementation, you would send this message to your backend
+                // Here's a simulation of receiving a response after a short delay
+                setTimeout(() => {
+                    // Send the message to backend
+                    fetch('/chat', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ message: message })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Add incoming message to chat
+                        const incomingMessage = document.createElement('div');
+                        incomingMessage.className = 'message incoming';
+                        incomingMessage.innerHTML = `<div class="message-bubble">${data.reply}</div>`;
+                        chatContent.appendChild(incomingMessage);
+                        
+                        // Scroll to bottom
+                        chatContent.scrollTop = chatContent.scrollHeight;
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // Add error message
+                        const errorMessage = document.createElement('div');
+                        errorMessage.className = 'message incoming';
+                        errorMessage.innerHTML = `<div class="message-bubble">Sorry, there was an error processing your request. Please try again later.</div>`;
+                        chatContent.appendChild(errorMessage);
+                        
+                        // Scroll to bottom
+                        chatContent.scrollTop = chatContent.scrollHeight;
+                    });
+                }, 500);
+            }
+        }
+    </script>
+</body>
+</html>

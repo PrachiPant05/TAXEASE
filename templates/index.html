@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Assistant - Your Digital Tax Partner</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --primary-dark: #0a58ca;
+            --secondary-color: #6c757d;
+            --success-color: #198754;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --border-radius: 8px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        main {
+            margin-top: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        h1, h2, h3 {
+            color: var(--dark-color);
+            margin-bottom: 20px;
+        }
+        
+        .form-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .form-title i {
+            margin-right: 10px;
+            color: var(--primary-color);
+            font-size: 28px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .file-input-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .file-input-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            background-color: #e9ecef;
+            border: 1px dashed #ced4da;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            text-align: center;
+            font-weight: normal;
+            margin-bottom: 0;
+        }
+        
+        .file-input-label i {
+            margin-right: 10px;
+        }
+        
+        .file-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .file-name {
+            margin-top: 8px;
+            font-size: 14px;
+            color: var(--secondary-color);
+        }
+        
+        .form-sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+        }
+        
+        .form-section-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 30px;
+        }
+        
+        .form-actions .btn + .btn {
+            margin-left: 15px;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: auto;
+        }
+        
+        /* Chat widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+        
+        .chat-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            font-size: 24px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        
+        .chat-toggle:hover {
+            transform: scale(1.05);
+            background-color: var(--primary-dark);
+        }
+        
+        .chat-box {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            display: none;
+            overflow: hidden;
+        }
+        
+        .chat-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-support-options {
+            display: flex;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .support-option {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s;
+        }
+        
+        .support-option:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .support-option i {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        
+        .chat-content {
+            height: 300px;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+        }
+        
+        .message.incoming {
+            justify-content: flex-start;
+        }
+        
+        .message.outgoing {
+            justify-content: flex-end;
+        }
+        
+        .message-bubble {
+            max-width: 80%;
+            padding: 12px 15px;
+            border-radius: 18px;
+            font-size: 14px;
+        }
+        
+        .incoming .message-bubble {
+            background-color: #f1f0f0;
+            color: var(--dark-color);
+            border-top-left-radius: 5px;
+        }
+        
+        .outgoing .message-bubble {
+            background-color: var(--primary-color);
+            color: white;
+            border-top-right-radius: 5px;
+        }
+        
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        
+        .chat-input button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .chat-input button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* Call modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 400px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-close {
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--secondary-color);
+        }
+        
+        .call-icon {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .phone-number {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .call-actions {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .call-action {
+            margin: 0 10px;
+        }
+        
+        /* Flash messages */
+        .flash-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1500;
+        }
+        
+        .flash-message {
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: var(--border-radius);
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .flash-message .close {
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-sections {
+                grid-template-columns: 1fr;
+            }
+            
+            .chat-box {
+                width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">
+                <i class="fas fa-file-invoice-dollar"></i> TaxEase
+            </a>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="card">
+            <div class="form-title">
+                <i class="fas fa-file-upload"></i>
+                <h1>Upload Your Tax Documents</h1>
+            </div>
+            
+            <form action="/" method="POST" enctype="multipart/form-data" id="tax-form">
+                <div class="form-sections">
+                    <div class="form-section">
+                        <h3 class="form-section-title">Personal Information</h3>
+                        
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" class="input-field" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" class="input-field" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="input-field">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" name="address" class="input-field">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" id="dob" name="dob" class="input-field">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="income_source">Primary Income Source</label>
+                            <select id="income_source" name="income_source" class="input-field">
+                                <option value="">Please select</option>
+                                <option value="salary">Salary</option>
+                                <option value="business">Business</option>
+                                <option value="professional">Professional</option>
+                                <option value="investment">Investment</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3 class="form-section-title">Document Upload</h3>
+                        
+                        <div class="form-group">
+                            <label for="pan_card">PAN Card (Image or PDF)</label>
+                            <div class="file-input-container">
+                                <label class="file-input-label">
+                                    <i class="fas fa-id-card"></i> Select PAN Card
+                                    <input type="file" id="pan_card" name="pan_card" class="file-input" accept=".pdf,.jpg,.jpeg,.png" required>
+                                </label>
+                                <div id="pan-file-name" class="file-name"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="aadhaar_card">Aadhaar Card (Image or PDF)</label>
+                            <div class="file-input-container">
+                                <label class="file-input-label">
+                                    <i class="fas fa-id-badge"></i> Select Aadhaar Card
+                                    <input type="file" id="aadhaar_card" name="aadhaar_card" class="file-input" accept=".pdf,.jpg,.jpeg,.png" required>
+                                </label>
+                                <div id="aadhaar-file-name" class="file-name"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="financial_docs">Financial Documents (Form 16, Investments, etc.)</label>
+                            <div class="file-input-container">
+                                <label class="file-input-label">
+                                    <i class="fas fa-file-invoice"></i> Select Financial Documents
+                                    <input type="file" id="financial_docs" name="financial_docs" class="file-input" accept=".pdf,.jpg,.jpeg,.png" multiple required>
+                                </label>
+                                <div id="financial-files-name" class="file-name"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                    <button type="submit" class="btn">Submit Documents</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 TaxEase - Your Digital Tax Partner. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+        <div class="chat-toggle" id="chat-toggle">
+            <i class="fas fa-comments"></i>
+        </div>
+        
+        <div class="chat-box" id="chat-box">
+            <div class="chat-header">
+                <h3>Customer Support</h3>
+                <span id="close-chat"><i class="fas fa-times"></i></span>
+            </div>
+            
+            <div class="chat-support-options">
+                <div class="support-option" id="text-support">
+                    <i class="fas fa-comment-dots"></i>
+                    <span>Text</span>
+                </div>
+                <div class="support-option" id="call-support">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>Call</span>
+                </div>
+            </div>
+            
+            <div class="chat-content" id="chat-content">
+                <div class="message incoming">
+                    <div class="message-bubble">
+                        Hi there! How can I help you today with your tax-related questions?
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat-input">
+                <input type="text" id="chat-message" placeholder="Type your message...">
+                <button id="send-message"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Call Modal -->
+    <div class="modal" id="call-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Call Support</h3>
+                <span class="modal-close" id="close-call-modal">&times;</span>
+            </div>
+            <div class="call-icon">
+                <i class="fas fa-headset"></i>
+            </div>
+            <p>Our support team is available to help you with your tax-related questions!</p>
+            <div class="phone-number">
+                <i class="fas fa-phone-alt"></i> +91-1800-123-4567
+            </div>
+            <div class="call-actions">
+                <a href="tel:+911800123456" class="btn call-action">Call Now</a>
+                <button class="btn btn-secondary call-action" id="cancel-call">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Flash Messages -->
+    <div class="flash-container" id="flash-container">
+        <!-- Flash messages will be dynamically added here -->
+    </div>
+    
+    <script>
+        // Display file name after selection
+        document.getElementById('pan_card').addEventListener('change', function() {
+            const fileName = this.files[0] ? this.files[0].name : 'No file selected';
+            document.getElementById('pan-file-name').textContent = fileName;
+        });
+        
+        document.getElementById('aadhaar_card').addEventListener('change', function() {
+            const fileName = this.files[0] ? this.files[0].name : 'No file selected';
+            document.getElementById('aadhaar-file-name').textContent = fileName;
+        });
+        
+        document.getElementById('financial_docs').addEventListener('change', function() {
+            const fileCount = this.files.length;
+            if (fileCount > 0) {
+                document.getElementById('financial-files-name').textContent = `${fileCount} file(s) selected`;
+            } else {
+                document.getElementById('financial-files-name').textContent = 'No files selected';
+            }
+        });
+        
+        // Chat widget functionality
+        document.getElementById('chat-toggle').addEventListener('click', function() {
+            document.getElementById('chat-box').style.display = 'block';
+        });
+        
+        document.getElementById('close-chat').addEventListener('click', function() {
+            document.getElementById('chat-box').style.display = 'none';
+        });
+        
+        // Call support modal
+        document.getElementById('call-support').addEventListener('click', function() {
+            document.getElementById('call-modal').style.display = 'flex';
+        });
+        
+        document.getElementById('close-call-modal').addEventListener('click', function() {
+            document.getElementById('call-modal').style.display = 'none';
+        });
+        
+        document.getElementById('cancel-call').addEventListener('click', function() {
+            document.getElementById('call-modal').style.display = 'none';
+        });
+        
+        // Chat functionality
+        document.getElementById('send-message').addEventListener('click', sendMessage);
+        document.getElementById('chat-message').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        function sendMessage() {
+            const messageInput = document.getElementById('chat-message');
+            const message = messageInput.value.trim();
+            
+            if (message !== '') {
+                // Add outgoing message to chat
+                const chatContent = document.getElementById('chat-content');
+                const outgoingMessage = document.createElement('div');
+                outgoingMessage.className = 'message outgoing';
+                outgoingMessage.innerHTML = `<div class="message-bubble">${message}</div>`;
+                chatContent.appendChild(outgoingMessage);
+                
+                // Clear input
+                messageInput.value = '';
+                
+                // Scroll to bottom
+                chatContent.scrollTop = chatContent.scrollHeight;
+                
+                // In a real implementation, you would send this message to your backend
+                // Here's a simulation of receiving a response after a short delay
+                setTimeout(() => {
+                    // Send the message to backend
+                    fetch('/chat', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ message: message })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Add incoming message to chat
+                        const incomingMessage = document.createElement('div');
+                        incomingMessage.className = 'message incoming';
+                        incomingMessage.innerHTML = `<div class="message-bubble">${data.reply}</div>`;
+                        chatContent.appendChild(incomingMessage);
+                        
+                        // Scroll to bottom
+                        chatContent.scrollTop = chatContent.scrollHeight;
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // Add error message
+                        const errorMessage = document.createElement('div');
+                        errorMessage.className = 'message incoming';
+                        errorMessage.innerHTML = `<div class="message-bubble">Sorry, there was an error processing your request. Please try again later.</div>`;
+                        chatContent.appendChild(errorMessage);
+                        
+                        // Scroll to bottom
+                        chatContent.scrollTop = chatContent.scrollHeight;
+                    });
+                }, 500);
+            }
+        }
+        
+        // Display flash messages
+        function showFlashMessage(message, type = 'error') {
+            const flashContainer = document.getElementById('flash-container');
+            const flashMessage = document.createElement('div');
+            flashMessage.className = 'flash-message';
+            flashMessage.innerHTML = `
+                ${message}
+                <span class="close">&times;</span>
+            `;
+            
+            flashContainer.appendChild(flashMessage);
+            
+            // Add event listener to close button
+            flashMessage.querySelector('.close').addEventListener('click', function() {
+                flashContainer.removeChild(flashMessage);
+            });
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (flashContainer.contains(flashMessage)) {
+                    flashContainer.removeChild(flashMessage);
+                }
+            }, 5000);
+        }
+        
+        // Check for form submission errors
+        document.addEventListener('DOMContentLoaded', function() {
+            // This is where you would check for flash messages from the server
+            // For now, let's add a sample message if there's a URL parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('error')) {
+                showFlashMessage(urlParams.get('error'));
+            }
+        });
+    </script>
+</body>
+</html>
